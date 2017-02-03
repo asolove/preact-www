@@ -11,6 +11,7 @@ import rreaddir from 'recursive-readdir-sync';
 import minimatch from 'minimatch';
 import ssr from './src/ssr';
 import config from './src/config.json';
+import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer'
 
 const CONTENT = rreaddir('content').filter(minimatch.filter('**/*.md')).filter(minimatch.filter('!content/lang/**')).map( s => '/'+s );
 
@@ -174,7 +175,7 @@ module.exports = {
 				FALLBACK: { '/': '/' }
 			}
 		})
-	] : []),
+	] : []).concat([new BundleAnalyzerPlugin()]),
 
 	stats: false,
 
